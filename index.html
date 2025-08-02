@@ -434,11 +434,11 @@
     </div>
 
     <script>
-  const form = document.getElementById("contact-form");
+         const form = document.getElementById("contact-form");
   const thankYouMsg = document.getElementById("thank-you-msg");
 
   form.addEventListener("submit", async function (e) {
-    e.preventDefault(); // Stop page refresh
+    e.preventDefault();
 
     const formData = new FormData(form);
 
@@ -452,13 +452,13 @@
       });
 
       if (response.ok) {
-        thankYouMsg.style.display = "block";  // Show thank you message
-        form.reset(); // Clear form fields
+        thankYouMsg.style.display = "block";
+        form.reset();
       } else {
-        alert("Oops! Something went wrong. Please try again.");
+        alert("Oops! Something went wrong.");
       }
     } catch (error) {
-      alert("Network error. Please try again later.");
+      alert("Network error. Please try again.");
     }
   });
         // Mobile Menu Toggle
