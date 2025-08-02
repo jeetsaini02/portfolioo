@@ -690,8 +690,11 @@
 
 
 
-       const contactForm = document.getElementById('contact-form');
-    const successMessage = document.getElementById('successMessage');
+     
+    </script>
+    <script>
+    const contactForm = document.getElementById('contact-form');
+    const thankYouMsg = document.getElementById('thank-you-msg');
 
     contactForm.addEventListener('submit', async function (e) {
         e.preventDefault();
@@ -709,10 +712,10 @@
 
             if (response.ok) {
                 contactForm.reset();
-                successMessage.style.display = 'block';
+                thankYouMsg.style.display = 'block';
 
                 setTimeout(() => {
-                    successMessage.style.display = 'none';
+                    thankYouMsg.style.display = 'none';
                 }, 3000);
             } else {
                 alert("Something went wrong. Please try again.");
@@ -721,8 +724,8 @@
             alert("There was an error submitting the form.");
         }
     });
-    </script>
-    
+</script>
+
 </body>
 </html>
 
