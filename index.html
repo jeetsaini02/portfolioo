@@ -690,6 +690,35 @@
 
         
     </script>
+
+   <script>
+  const form = document.getElementById("contact-form");
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault(); // Stop default page redirect
+
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch(form.action, {
+        method: form.method,
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        alert("Thank you! Your message has been sent.");
+        form.reset(); // Clear form fields
+      } else {
+        alert("Oops! Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      alert("Error! Network or server issue.");
+    }
+  });
+</script>
     
 </body>
 </html>
