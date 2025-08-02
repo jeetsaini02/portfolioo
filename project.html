@@ -340,18 +340,17 @@
             </div>
         </div>
     </div>
-
-    <!-- Footer -->
+<!-- Footer -->
     <footer>
         <div class="footer-content">
-            <a href="index.html" class="footer-logo">Jinendra<span>Saini</span></a>
+            <a href="#" class="footer-logo">Jinendra<span>Saini</span></a>
             <div class="footer-links">
-                <a href="index.html">Home</a>
-                <a href="index.html#about">About</a>
-                <a href="portfolio.html">Portfolio</a>
-                <a href="index.html#pricing">Pricing</a>
-                <a href="index.html#testimonials">Testimonials</a>
-                <a href="index.html#contact">Contact</a>
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#projects">Projects</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#testimonials">Testimonials</a>
+                <a href="#contact">Contact</a>
             </div>
             <div class="footer-social">
                 <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -369,93 +368,33 @@
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <script>
-        // Mobile Menu Toggle (same as original)
-        const menuToggle = document.querySelector('.menu-toggle');
-        const navbar = document.querySelector('.navbar');
+    <!-- Chatbot Widget -->
+    <div class="chatbot-container">
+        <div class="chatbot-header">
+            <h3>Need Help?</h3>
+            <button class="chatbot-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="chatbot-messages">
+            <div class="chatbot-message bot">
+                <div class="message-content">
+                    Hi there! I'm Jinendra's assistant. How can I help you today?
+                </div>
+            </div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" placeholder="Type your message...">
+            <button><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+    <div class="chatbot-toggle">
+        <i class="fas fa-comment-dots"></i>
+    </div>
 
-        menuToggle.addEventListener('click', () => {
-            navbar.classList.toggle('active');
-            menuToggle.classList.toggle('fa-times');
-        });
 
-        // Close menu when clicking on a link
-        document.querySelectorAll('.navbar a').forEach(link => {
-            link.addEventListener('click', () => {
-                navbar.classList.remove('active');
-                menuToggle.classList.remove('fa-times');
-            });
-        });
 
-        // Sticky Header on Scroll
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            header.classList.toggle('sticky', window.scrollY > 0);
-        });
-
-        // Portfolio Filter
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        const portfolioItems = document.querySelectorAll('.portfolio-item');
-
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                // Remove active class from all buttons
-                filterBtns.forEach(btn => btn.classList.remove('active'));
-                // Add active class to clicked button
-                btn.classList.add('active');
-                
-                const filter = btn.dataset.filter;
-                
-                portfolioItems.forEach(item => {
-                    if (filter === 'all' || item.dataset.category.includes(filter)) {
-                        item.style.display = 'block';
-                    } else {
-                        item.style.display = 'none';
-                    }
-                });
-            });
-        });
-
-        // Project Modal
-        const viewProjectBtns = document.querySelectorAll('.view-project');
-        const modals = document.querySelectorAll('.modal');
-        const modalCloseBtns = document.querySelectorAll('.modal-close');
-
-        viewProjectBtns.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                const projectId = btn.dataset.project;
-                const modal = document.getElementById(`project-modal-${projectId}`);
-                modal.style.display = 'block';
-                document.body.style.overflow = 'hidden';
-            });
-        });
-
-        modalCloseBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const modal = btn.closest('.modal');
-                modal.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            });
-        });
-
-        // Close modal when clicking outside
-        window.addEventListener('click', (e) => {
-            if (e.target.classList.contains('modal')) {
-                e.target.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
-        });
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
+  
+    <script src="main.js"></script>
 </body>
 </html>
