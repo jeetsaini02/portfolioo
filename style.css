@@ -162,7 +162,7 @@ body {
         padding: 15px 5%;
     }
     .mobile{
-        color:white;
+        color:white !important;
     }
 }
 /* Header Styles */
