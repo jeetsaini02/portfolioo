@@ -24,6 +24,33 @@
             <a href="#contact">Contact</a>
         </nav>
     </header>
+    <div class="mobile-menu">
+    <button class="close-btn">
+        <i class="fas fa-times"></i>
+    </button>
+    <div class="mobile-menu-content">
+        <nav class="mobile-nav">
+            <ul>
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        
+        <div class="mobile-footer">
+            <div class="mobile-name">Your Name Here</div>
+            <a href="tel:+1234567890" class="mobile-contact">+123 456 7890</a>
+            <div class="mobile-social">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
@@ -734,6 +761,29 @@
         });
 
         
+
+        // Mobile menu toggle
+const menuToggle = document.querySelector('.menu-toggle');
+const mobileMenu = document.querySelector('.mobile-menu');
+const closeBtn = document.querySelector('.mobile-menu .close-btn');
+
+menuToggle.addEventListener('click', () => {
+    mobileMenu.classList.add('active');
+    document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
+});
+
+closeBtn.addEventListener('click', () => {
+    mobileMenu.classList.remove('active');
+    document.body.style.overflow = ''; // Re-enable scrolling
+});
+
+// Close mobile menu when clicking on links
+document.querySelectorAll('.mobile-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+});
     </script>
 
   
