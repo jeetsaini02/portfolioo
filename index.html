@@ -434,6 +434,33 @@
     </div>
 
     <script>
+  const form = document.getElementById("contact-form");
+  const thankYouMsg = document.getElementById("thank-you-msg");
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault(); // Stop page refresh
+
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch(form.action, {
+        method: form.method,
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        thankYouMsg.style.display = "block";  // Show thank you message
+        form.reset(); // Clear form fields
+      } else {
+        alert("Oops! Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      alert("Network error. Please try again later.");
+    }
+  });
         // Mobile Menu Toggle
         const menuToggle = document.querySelector('.menu-toggle');
         const navbar = document.querySelector('.navbar');
@@ -451,6 +478,8 @@
             });
         });
 
+
+        
         // Sticky Header on Scroll
         window.addEventListener('scroll', () => {
             const header = document.querySelector('header');
@@ -691,34 +720,7 @@
         
     </script>
 
-   <script>
-  const form = document.getElementById("contact-form");
-
-  form.addEventListener("submit", async function (e) {
-    e.preventDefault(); // Stop default page redirect
-
-    const formData = new FormData(form);
-
-    try {
-      const response = await fetch(form.action, {
-        method: form.method,
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
-      });
-
-      if (response.ok) {
-        alert("Thank you! Your message has been sent.");
-        form.reset(); // Clear form fields
-      } else {
-        alert("Oops! Something went wrong. Please try again.");
-      }
-    } catch (error) {
-      alert("Error! Network or server issue.");
-    }
-  });
-</script>
+  
     
 </body>
 </html>
