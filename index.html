@@ -688,34 +688,7 @@
             autoRotateOrbit();
         });
     </script>
-    <script>
-document.getElementById('contact-form').addEventListener('submit', async function(e) {
-  e.preventDefault(); // Default form submit ko rokna
-
-  const form = e.target;
-  const formData = new FormData(form);
-
-  try {
-    const response = await fetch('https://formspree.io/f/xeozlenp', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json'
-      },
-      body: formData
-    });
-
-    if (response.ok) {
-      form.reset(); // Form fields clear kar do
-      document.getElementById('thank-you-msg').style.display = 'block';
-    } else {
-      alert('❌ Something went wrong. Please try again later.');
-    }
-  } catch (error) {
-    console.error('Error:', error);
-    alert('❌ There was an error sending the form.');
-  }
-});
-</script>
+    
 </body>
 </html>
 
