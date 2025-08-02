@@ -10,11 +10,8 @@
 </head>
 <body>
     <!-- Header -->
-    <header>
+     <header>
         <a href="#" class="logo">Jinendra<span>Saini</span></a>
-        <div class="menu-toggle">
-            <i class="fas fa-bars"></i>
-        </div>
         <nav class="navbar">
             <a href="#home" class="active">Home</a>
             <a href="#about">About us</a>
@@ -23,34 +20,40 @@
             <a href="#testimonials">Testimonials</a>
             <a href="#contact">Contact</a>
         </nav>
+        <button class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </button>
     </header>
-    <div class="mobile-menu">
-    <button class="close-btn">
-        <i class="fas fa-times"></i>
-    </button>
-    <div class="mobile-menu-content">
-        <nav class="mobile-nav">
-            <ul>
-                <li><a href="#home" class="active">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-        
-        <div class="mobile-footer">
-            <div class="mobile-name">Your Name Here</div>
-            <a href="tel:+1234567890" class="mobile-contact">+123 456 7890</a>
-            <div class="mobile-social">
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-                <a href="#"><i class="fab fa-github"></i></a>
-                <a href="#"><i class="fab fa-whatsapp"></i></a>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="close-btn" id="closeBtn">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="mobile-menu-content">
+            <nav class="mobile-nav">
+                <ul>
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="project.html">Projects</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <div class="mobile-footer">
+                <div class="mobile-name">Jinendra Saini</div>
+                <a href="tel:+917627043688" class="mobile-contact">+91 76270 43688</a>
+                <div class="mobile-social">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
@@ -501,7 +504,57 @@
         <i class="fas fa-comment-dots"></i>
     </div>
 
-    
+      <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const closeBtn = document.getElementById('closeBtn');
+        const mobileLinks = document.querySelectorAll('.mobile-menu a');
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Close menu when clicking outside
+        mobileMenu.addEventListener('click', (e) => {
+            if (e.target === mobileMenu) {
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Highlight active menu item based on scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const scrollPosition = window.scrollY + 100;
+            
+            sections.forEach(section => {
+                if (scrollPosition >= section.offsetTop && scrollPosition < section.offsetTop + section.offsetHeight) {
+                    const id = section.getAttribute('id');
+                    document.querySelectorAll('.navbar a, .mobile-menu a').forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${id}` || 
+                           (id === 'home' && link.getAttribute('href') === '#')) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
     <script>
                
         // Sticky Header on Scroll
@@ -740,31 +793,6 @@
             // Start auto-rotation
             autoRotateOrbit();
         });
-
-        
-
-        // Mobile menu toggle
-const menuToggle = document.querySelector('.menu-toggle');
-const mobileMenu = document.querySelector('.mobile-menu');
-const closeBtn = document.querySelector('.mobile-menu .close-btn');
-
-menuToggle.addEventListener('click', () => {
-    mobileMenu.classList.add('active');
-    document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
-});
-
-closeBtn.addEventListener('click', () => {
-    mobileMenu.classList.remove('active');
-    document.body.style.overflow = ''; // Re-enable scrolling
-});
-
-// Close mobile menu when clicking on links
-document.querySelectorAll('.mobile-menu a').forEach(link => {
-    link.addEventListener('click', () => {
-        mobileMenu.classList.remove('active');
-        document.body.style.overflow = '';
-    });
-});
     </script>
 
   
