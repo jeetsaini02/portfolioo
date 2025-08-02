@@ -434,11 +434,10 @@
     </div>
 
     <script>
-         const form = document.getElementById("contact-form");
-  const thankYouMsg = document.getElementById("thank-you-msg");
+          const form = document.getElementById("contact-form");
 
   form.addEventListener("submit", async function (e) {
-    e.preventDefault();
+    e.preventDefault(); // prevent default redirect
 
     const formData = new FormData(form);
 
@@ -452,10 +451,10 @@
       });
 
       if (response.ok) {
-        thankYouMsg.style.display = "block";
-        form.reset();
+        // ✅ Redirect after successful submission
+        window.location.href = "https://jeetsainiportfolio.netlify.app/";
       } else {
-        alert("Oops! Something went wrong.");
+        alert("Oops! Something went wrong. Please try again.");
       }
     } catch (error) {
       alert("Network error. Please try again.");
