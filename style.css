@@ -155,6 +155,7 @@ body {
     .menu-toggle {
         display: block;
         z-index: 10000;
+        border: none !important;
     }
     
     header {
