@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Projects | Jinendra Saini</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reusing all the same CSS from the original theme */
+        :root {
+            --primary-color: #ff0033;
+            --secondary-color: #000;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --gray-color: #6c757d;
+            --glass-color: rgba(255, 255, 255, 0.15);
+            --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            overflow-x: hidden;
+        }
+
+        /* Header Styles (same as original) */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            background-color: var(--glass-color);
+            box-shadow: var(--shadow);
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        .navbar a {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--secondary-color);
+            text-decoration: none;
+            margin-left: 30px;
+            transition: var(--transition);
+        }
+
+        .navbar a:hover,
+        .navbar a.active {
+            color: var(--primary-color);
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 24px;
+            color: var(--secondary-color);
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 150px 10% 80px;
+            background: linear-gradient(135deg, rgba(255,0,51,0.1) 0%, rgba(255,255,255,1) 100%);
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+
+        .page-header h1 span {
+            color: var(--primary-color);
+        }
+
+        .page-header p {
+            font-size: 18px;
+            color: var(--gray-color);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Projects Section (enhanced for portfolio page) */
+        .portfolio-projects {
+            padding: 80px 10%;
+            background-color: #fff;
+        }
+
+        .portfolio-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .filter-btn {
+            padding: 8px 20px;
+            background-color: transparent;
+            border: 1px solid #e9ecef;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--gray-color);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background-color: var(--primary-color);
+            color: #fff;
+            border-color: var(--primary-color);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .portfolio-item {
+            position: relative;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .portfolio-img {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .portfolio-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover .portfolio-img img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            opacity: 0;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-info {
+            transform: translateY(20px);
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover .portfolio-info {
+            transform: translateY(0);
+        }
+
+        .portfolio-info h3 {
+            font-size: 20px;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .portfolio-info p {
+            font-size: 14px;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 15px;
+        }
+
+        .portfolio-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .portfolio-tag {
+            font-size: 12px;
+            padding: 4px 10px;
+            background-color: rgba(255, 0, 51, 0.2);
+            color: #fff;
+            border-radius: 20px;
+        }
+
+        .portfolio-links {
+            display: flex;
+            gap: 10px;
+        }
+
+        .portfolio-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.2);
+            color: #fff;
+            border-radius: 50%;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .portfolio-link:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        /* Project Details Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            z-index: 10000;
+            overflow-y: auto;
+            padding: 50px 0;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            max-width: 900px;
+            margin: 0 auto;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+
+        .modal-header {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .modal-header img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(0,0,0,0.5);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            background-color: var(--primary-color);
+        }
+
+        .modal-body {
+            padding: 40px;
+        }
+
+        .modal-title {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .modal-subtitle {
+            font-size: 16px;
+            color: var(--gray-color);
+            margin-bottom: 30px;
+        }
+
+        .modal-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .modal-col {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .modal-col h4 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+
+        .modal-features li {
+            list-style: none;
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: var(--gray-color);
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .modal-features li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+        }
+
+        .modal-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--gray-color);
+            margin-bottom: 30px;
+        }
+
+        .modal-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .modal-gallery img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .modal-gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .modal-btn {
+            display: inline-block;
+            padding: 10px 25px;
+            background-color: var(--primary-color);
+            color: #fff;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .modal-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .modal-btn.outline {
+            background-color: transparent;
+            border: 1px solid #e9ecef;
+            color: var(--gray-color);
+        }
+
+        .modal-btn.outline:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        /* Footer (same as original) */
+        footer {
+            background-color: var(--secondary-color);
+            color: #fff;
+            padding: 30px 10%;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .footer-logo span {
+            color: #fff;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .footer-social a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* WhatsApp Button (same as original) */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: #25D366;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+            z-index: 999;
+            transition: var(--transition);
+            text-decoration: none;
+            animation: pulse 2s infinite;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4);
+        }
+
+        /* Animations */
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+            header {
+                padding: 20px 5%;
+            }
+            
+            .page-header,
+            .portfolio-projects {
+                padding: 80px 5%;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .page-header h1 {
+                font-size: 42px;
+            }
+            
+            .portfolio-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .navbar {
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: #fff;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                transform: translateY(-150%);
+                opacity: 0;
+                transition: transform 0.3s ease, opacity 0.3s ease;
+            }
+            
+            .navbar.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            
+            .navbar a {
+                margin: 10px 0;
+            }
+            
+            .page-header {
+                padding-top: 120px;
+                padding-bottom: 60px;
+            }
+            
+            .modal-header {
+                height: 300px;
+            }
+            
+            .modal-body {
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .page-header h1 {
+                font-size: 36px;
+            }
+            
+            .page-header p {
+                font-size: 16px;
+            }
+            
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-row {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .modal-footer {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <a href="index.html" class="logo">Jinendra<span>Saini</span></a>
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <nav class="navbar">
+            <a href="index.html">Home</a>
+            <a href="index.html#about">About</a>
+            <a href="portfolio.html" class="active">Portfolio</a>
+            <a href="index.html#pricing">Pricing</a>
+            <a href="index.html#testimonials">Testimonials</a>
+            <a href="index.html#contact">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1>My <span>Portfolio</span></h1>
+        <p>Explore my collection of projects that showcase my skills and experience in web development. Each project represents a unique challenge and solution.</p>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio-projects">
+        <div class="portfolio-filter">
+            <button class="filter-btn active" data-filter="all">All Projects</button>
+            <button class="filter-btn" data-filter="wordpress">WordPress</button>
+            <button class="filter-btn" data-filter="ecommerce">E-commerce</button>
+            <button class="filter-btn" data-filter="php">PHP</button>
+            <button class="filter-btn" data-filter="custom">Custom Solutions</button>
+        </div>
+
+        <div class="portfolio-grid">
+            <!-- Project 1 -->
+            <div class="portfolio-item" data-category="wordpress ecommerce">
+                <div class="portfolio-img">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="E-commerce Website">
+                </div>
+                <div class="portfolio-overlay">
+                    <div class="portfolio-info">
+                        <h3>E-commerce Website</h3>
+                        <p>A fully customized WooCommerce solution with custom payment gateway integration and advanced product filtering.</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">WordPress</span>
+                            <span class="portfolio-tag">WooCommerce</span>
+                            <span class="portfolio-tag">PHP</span>
+                        </div>
+                        <div class="portfolio-links">
+                            <a href="#" class="portfolio-link view-project" data-project="1"><i class="fas fa-eye"></i></a>
+                            <a href="#" class="portfolio-link"><i class="fas fa-link"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="portfolio-item" data-category="wordpress">
+                <div class="portfolio-img">
+                    <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80" alt="Corporate Website">
+                </div>
+                <div class="portfolio-overlay">
+                    <div class="portfolio-info">
+                        <h3>Corporate Website</h3>
+                        <p>A responsive corporate website with custom theme development and CMS integration for easy content management.</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">WordPress</span>
+                            <span class="portfolio-tag">Custom Theme</span>
+                            <span class="portfolio-tag">JavaScript</span>
+                        </div>
+                        <div class="portfolio-links">
+                            <a href="#" class="portfolio-link view-project" data-project="2"><i class="fas fa-eye"></i></a>
+                            <a href="#" class="portfolio-link"><i class="fas fa-link"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="portfolio-item" data-category="php custom">
+                <div class="portfolio-img">
+                    <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Membership Portal">
+                </div>
+                <div class="portfolio-overlay">
+                    <div class="portfolio-info">
+                        <h3>Membership Portal</h3>
+                        <p>A subscription-based membership portal with user roles, content restriction, and payment integration.</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">PHP</span>
+                            <span class="portfolio-tag">MySQL</span>
+                            <span class="portfolio-tag">REST API</span>
+                        </div>
+                        <div class="portfolio-links">
+                            <a href="#" class="portfolio-link view-project" data-project="3"><i class="fas fa-eye"></i></a>
+                            <a href="#" class="portfolio-link"><i class="fas fa-link"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 4 -->
+            <div class="portfolio-item" data-category="wordpress custom">
+                <div class="portfolio-img">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Learning Management System">
+                </div>
+                <div class="portfolio-overlay">
+                    <div class="portfolio-info">
+                        <h3>Learning Management System</h3>
+                        <p>A custom LMS built on WordPress with course management, quizzes, and certificate generation.</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">WordPress</span>
+                            <span class="portfolio-tag">LMS</span>
+                            <span class="portfolio-tag">JavaScript</span>
+                        </div>
+                        <div class="portfolio-links">
+                            <a href="#" class="portfolio-link view-project" data-project="4"><i class="fas fa-eye"></i></a>
+                            <a href="#" class="portfolio-link"><i class="fas fa-link"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 5 -->
+            <div class="portfolio-item" data-category="wordpress ecommerce">
+                <div class="portfolio-img">
+                    <img src="https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1152&q=80" alt="Real Estate Portal">
+                </div>
+                <div class="portfolio-overlay">
+                    <div class="portfolio-info">
+                        <h3>Real Estate Portal</h3>
+                        <p>A property listing website with advanced search filters, Google Maps integration, and lead management.</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">WordPress</span>
+                            <span class="portfolio-tag">Custom Plugin</span>
+                            <span class="portfolio-tag">API Integration</span>
+                        </div>
+                        <div class="portfolio-links">
+                            <a href="#" class="portfolio-link view-project" data-project="5"><i class="fas fa-eye"></i></a>
+                            <a href="#" class="portfolio-link"><i class="fas fa-link"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 6 -->
+            <div class="portfolio-item" data-category="php custom">
+                <div class="portfolio-img">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Booking System">
+                </div>
+                <div class="portfolio-overlay">
+                    <div class="portfolio-info">
+                        <h3>Booking System</h3>
+                        <p>A custom appointment booking system with calendar integration, email notifications, and payment processing.</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">PHP</span>
+                            <span class="portfolio-tag">MySQL</span>
+                            <span class="portfolio-tag">jQuery</span>
+                        </div>
+                        <div class="portfolio-links">
+                            <a href="#" class="portfolio-link view-project" data-project="6"><i class="fas fa-eye"></i></a>
+                            <a href="#" class="portfolio-link"><i class="fas fa-link"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Modals -->
+    <!-- Modal 1 -->
+    <div class="modal" id="project-modal-1">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="E-commerce Website">
+                <div class="modal-close"><i class="fas fa-times"></i></div>
+            </div>
+            <div class="modal-body">
+                <h2 class="modal-title">E-commerce Website</h2>
+                <p class="modal-subtitle">A fully customized WooCommerce solution with custom payment gateway integration</p>
+                
+                <div class="modal-row">
+                    <div class="modal-col">
+                        <h4>Project Details</h4>
+                        <ul class="modal-features">
+                            <li>Custom WordPress Theme Development</li>
+                            <li>WooCommerce Integration</li>
+                            <li>Custom Payment Gateway</li>
+                            <li>Advanced Product Filtering</li>
+                            <li>Responsive Design</li>
+                            <li>SEO Optimized</li>
+                        </ul>
+                    </div>
+                    <div class="modal-col">
+                        <h4>Technologies Used</h4>
+                        <ul class="modal-features">
+                            <li>WordPress</li>
+                            <li>PHP</li>
+                            <li>JavaScript</li>
+                            <li>MySQL</li>
+                            <li>WooCommerce API</li>
+                            <li>HTML5/CSS3</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h4>Project Description</h4>
+                <p class="modal-text">
+                    This e-commerce website was developed for a fashion boutique looking to expand their online presence. 
+                    The project involved creating a custom WordPress theme tailored to their brand identity, with seamless 
+                    WooCommerce integration. I implemented a custom payment gateway to accommodate their preferred payment 
+                    processor and developed advanced product filtering to enhance user experience. The site features a 
+                    responsive design that works perfectly across all devices, and was optimized for search engines to 
+                    maximize visibility.
+                </p>
+                
+                <h4>Project Gallery</h4>
+                <div class="modal-gallery">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="E-commerce Homepage">
+                    <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Product Page">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Checkout Process">
+                    <img src="https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1152&q=80" alt="Mobile View">
+                </div>
+                
+                <div class="modal-footer">
+                    <div>
+                        <a href="#" class="modal-btn"><i class="fas fa-link"></i> Visit Website</a>
+                        <a href="#" class="modal-btn outline"><i class="fas fa-code"></i> View Code</a>
+                    </div>
+                    <div>
+                        <a href="index.html#contact" class="modal-btn"><i class="fas fa-paper-plane"></i> Hire Me</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2 -->
+    <div class="modal" id="project-modal-2">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80" alt="Corporate Website">
+                <div class="modal-close"><i class="fas fa-times"></i></div>
+            </div>
+            <div class="modal-body">
+                <h2 class="modal-title">Corporate Website</h2>
+                <p class="modal-subtitle">A responsive corporate website with custom theme development</p>
+                
+                <div class="modal-row">
+                    <div class="modal-col">
+                        <h4>Project Details</h4>
+                        <ul class="modal-features">
+                            <li>Custom WordPress Theme</li>
+                            <li>CMS Integration</li>
+                            <li>Team Management</li>
+                            <li>News/Blog Section</li>
+                            <li>Contact Forms</li>
+                            <li>Multilingual Support</li>
+                        </ul>
+                    </div>
+                    <div class="modal-col">
+                        <h4>Technologies Used</h4>
+                        <ul class="modal-features">
+                            <li>WordPress</li>
+                            <li>PHP</li>
+                            <li>JavaScript</li>
+                            <li>Advanced Custom Fields</li>
+                            <li>WPML</li>
+                            <li>CSS3 Animations</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h4>Project Description</h4>
+                <p class="modal-text">
+                    Developed a corporate website for a technology company that needed a modern, professional online presence. 
+                    The project involved creating a custom WordPress theme from scratch, tailored to their brand guidelines. 
+                    I implemented a comprehensive CMS solution allowing their team to easily update content without technical 
+                    knowledge. The site features a team management section, news/blog functionality, and multilingual support 
+                    to cater to their international clientele. Special attention was given to performance optimization, 
+                    resulting in a 60% improvement in load times compared to their previous website.
+                </p>
+                
+                <h4>Project Gallery</h4>
+                <div class="modal-gallery">
+                    <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80" alt="Corporate Homepage">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Services Page">
+                    <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Team Section">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Contact Page">
+                </div>
+                
+                <div class="modal-footer">
+                    <div>
+                        <a href="#" class="modal-btn"><i class="fas fa-link"></i> Visit Website</a>
+                        <a href="#" class="modal-btn outline"><i class="fas fa-code"></i> View Code</a>
+                    </div>
+                    <div>
+                        <a href="index.html#contact" class="modal-btn"><i class="fas fa-paper-plane"></i> Hire Me</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <a href="index.html" class="footer-logo">Jinendra<span>Saini</span></a>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="index.html#about">About</a>
+                <a href="portfolio.html">Portfolio</a>
+                <a href="index.html#pricing">Pricing</a>
+                <a href="index.html#testimonials">Testimonials</a>
+                <a href="index.html#contact">Contact</a>
+            </div>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+            </div>
+            <p class="copyright">© 2023 Jinendra Saini. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/917627043688" class="whatsapp-btn" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Mobile Menu Toggle (same as original)
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navbar = document.querySelector('.navbar');
+
+        menuToggle.addEventListener('click', () => {
+            navbar.classList.toggle('active');
+            menuToggle.classList.toggle('fa-times');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.navbar a').forEach(link => {
+            link.addEventListener('click', () => {
+                navbar.classList.remove('active');
+                menuToggle.classList.remove('fa-times');
+            });
+        });
+
+        // Sticky Header on Scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            header.classList.toggle('sticky', window.scrollY > 0);
+        });
+
+        // Portfolio Filter
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterBtns.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                btn.classList.add('active');
+                
+                const filter = btn.dataset.filter;
+                
+                portfolioItems.forEach(item => {
+                    if (filter === 'all' || item.dataset.category.includes(filter)) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Project Modal
+        const viewProjectBtns = document.querySelectorAll('.view-project');
+        const modals = document.querySelectorAll('.modal');
+        const modalCloseBtns = document.querySelectorAll('.modal-close');
+
+        viewProjectBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const projectId = btn.dataset.project;
+                const modal = document.getElementById(`project-modal-${projectId}`);
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        modalCloseBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const modal = btn.closest('.modal');
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal')) {
+                e.target.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
