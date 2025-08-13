@@ -318,3 +318,93 @@ if (contactForm) {
         });
     });
 }
+
+
+
+
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Portfolio Filtering
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+    
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Update active button
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            
+            const filterValue = button.getAttribute('data-filter');
+            
+            // Filter items
+            portfolioItems.forEach(item => {
+                if (filterValue === 'all' || item.getAttribute('data-category').includes(filterValue)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    });
+    
+    // Project Modals
+    const viewProjectButtons = document.querySelectorAll('.view-project');
+    const modals = document.querySelectorAll('.modal');
+    const modalCloseButtons = document.querySelectorAll('.modal-close');
+    
+    viewProjectButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            const projectId = button.getAttribute('data-project');
+            const modal = document.getElementById(`project-modal-${projectId}`);
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+    
+    modalCloseButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const modal = button.closest('.modal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+    });
+    
+    // Close modal when clicking outside
+    modals.forEach(modal => {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+    });
+    
+    // Close modal with ESC key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            modals.forEach(modal => {
+                if (modal.classList.contains('active')) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        }
+    });
+    
+    // Modal gallery image click (optional - for lightbox)
+    const modalGalleryImages = document.querySelectorAll('.modal-gallery img');
+    modalGalleryImages.forEach(img => {
+        img.addEventListener('click', () => {
+            // You can implement a lightbox here if needed
+            // For now, it just enlarges the clicked image in the modal header
+            const modalHeader = img.closest('.modal').querySelector('.modal-header img');
+            modalHeader.src = img.src;
+        });
+    });
+});
